@@ -73,3 +73,76 @@ char* RomoveCharAtEnd(char* str,char ch)
     str[++i]=0;
     return str;
 }
+
+/*输入一个10进制的整数，按指定进制反转
+ 如：7按2进制反转后是7，16按2进制反转后是1*/
+
+int Reverse(int x,int radix)
+{
+    int y=0;
+    while(x)
+    {
+        y=y*radix+y%radix;
+        y=y/radix;
+    }
+    return y;
+}
+
+/*给出一个只含有数字的字符串，按指定进制转换为整数*/
+int CharToInt(char* num,int radix)
+{
+    int x=0;
+    int i=0;
+    while(num[i])
+    {
+        x=x*radix+(num[i]-'0');
+        i++;
+    }
+    return x;
+}
+/*整数的从小到大的冒泡排序*/
+void Bubble(int* a,int n)
+{
+    for(int i=0;i<n;i++)
+    {
+        int flag=1;
+        for(int j=n-1;j>i;j--)
+        {
+            if(a[j]<a[j-1])
+            {
+                int t=a[j];
+                a[j]=a[j-1];
+                a[j-1]=t;
+                flag=0;
+            }
+        }
+        if(flag)
+            break;
+    }
+}
+
+int SplitString(char split[][100],char* str,char x)
+{
+    RomoveCharAtEnd(str, x);
+    RomoveCharAtBegin(str, x);
+    int sum=0;
+    int i=0;
+    int j=0;
+    while(str[i])
+    {
+        if(str[i]==x)
+        {
+            split[sum][j]=0;
+            sum++;
+            j=0;
+            while(str[i++]==x);
+            i--;
+        }
+        else
+        {
+            split[sum][j++]=str[i++];
+        }
+    }
+    split[sum][j]=0;
+    return ++sum;
+}
