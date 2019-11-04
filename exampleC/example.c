@@ -82,8 +82,8 @@ int Reverse(int x,int radix)
     int y=0;
     while(x)
     {
-        y=y*radix+y%radix;
-        y=y/radix;
+        y=y*radix+x%radix;
+        x=x/radix;
     }
     return y;
 }
