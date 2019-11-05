@@ -123,7 +123,7 @@ int Reverse(int x,int radix)
 *@parameter: radix, the specified base
 *@return: the integer after conversion
 */
-int CharToInt(char* num,int radix)
+int StringToInt(char* num,int radix)
 {
     int x=0;
     int i=0;
@@ -160,8 +160,17 @@ void Bubble(int* a,int n)
             break;
     }
 }
-//将一个字符串按指定字符分隔为若干字符串存储到二维数组中
-//函数的返回值为分隔字符串个数
+
+/*
+*@简介：将一个字符串按指定字符分隔为若干字符串存储到二维数组中
+*brief: Separate a string into several strings according 
+*to the specified characters and 
+*store them in a two-dimensional array
+*@parameter: split, the 2-D array stored the substrings
+*@parameter: str, the original character string
+*@parameter: x, the separated character
+*@return: the number of separator strings
+*/
 int SplitString(char split[][100],char* str,char x)
 {
     RomoveCharAtEnd(str, x);
@@ -171,50 +180,64 @@ int SplitString(char split[][100],char* str,char x)
     int j=0;
     while(str[i])
     {
-        if(str[i]==x)  //遇见分隔字符
+        if(str[i]==x)  //meet the separated character
         {
-            split[sum][j]=0;  //该行结束
+            split[sum][j]=0;  //the end of this line
             sum++;
             j=0;
-            while(str[i++]==x);  //跳过连续的分隔字符
+            while(str[i++]==x);  //skip consecutive separators
             i--;
         }
         else
         {
-            split[sum][j++]=str[i++];  //拷贝字符到二维数组
+            split[sum][j++]=str[i++];  //copy to the 2-D array
         }
     }
     split[sum][j]=0;
     return ++sum;
 }
 
-//将整数按指定的进制（2<=radix<=16) 分解为字符串
-char* IntToChar(char* num,int n,int radix)
+/*
+*@简介：将整数按指定的进制（2<=radix<=16) 分解为字符串
+*@brief: Decomposes an integer into a string in 
+*the specified base (2 < = radius < = 16)
+*@parameter: num, the decomposed character string
+*@parameter: n, the integer will be decomposed
+*@parameter: radix, the specified base
+*@return: the pointer of the decomposed character string, 
+*that is the pointer of num
+*/
+char* IntToString(char* num,int n,int radix)
 {
     int i=0;
     while(n)
     {
         int m=n%radix;
-        if(0<=m && m<=9)  //转换为ASCII码
+        if(0<=m && m<=9)  //convert it to ASCII code
         {
             num[i++]=m+'0';
         }
-        else   //超过10转为A-F
+        else   //convert it to 'A'-'F' over 10
         {
             num[i++]=m-10+'A';
         }
-        n=n/radix; //缩小准备取下一位
+        n=n/radix; //the next number
     }
     num[i]=0;
-    strrev(num);  //反转字符串
+    strrev(num);  //reverse the string
     return num;
 }
-//反转字符串，strrev在c99标准中不是标准库函数，一些编译器并没提供
-//如果编译器提供了该函数，尽量使用编译器提供的版本
+/*
+*@简介: 反转字符串，strrev在c99标准中不是标准库函数，一些编译器并没提供
+*如果编译器提供了该函数，尽量使用编译器提供的版本
+*@brief: Strrev is not a standard library function in C99 standard. Some compilers do not provide
+If the compiler provides the function, try to use the version provided by the compiler
+*/
+
 char* strrev(char* str)
 {
-    int j=strlen(str);   //得到字符串长度
-    for(int i=0;i<j/2;i++)  //首尾交换
+    int j=strlen(str);   //the length of string
+    for(int i=0;i<j/2;i++)  //swap head and tail
     {
         char t=str[i];
         str[i]=str[j-i-1];

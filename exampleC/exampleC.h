@@ -14,9 +14,9 @@ int ParsingIntWithRadix(int x[],int n,int radix);
 char* RomoveCharAtBegin(char* str,char ch);
 char* RomoveCharAtEnd(char* str,char ch);
 int Reverse(int x,int radix);
-int CharToInt(char* num,int radix);
+int StringToInt(char* num,int radix);
 void Bubble(int* a,int n);
 int SplitString(char split[][100],char* str,char x);
-char* IntToChar(char* num,int n,int radix);
+char* IntToString(char* num,int n,int radix);
 char* strrev(char* str);
 #endif /* exampleC_h */
