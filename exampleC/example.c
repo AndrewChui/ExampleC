@@ -1,13 +1,17 @@
-//
 //  example.c
 //  exampleC
-//
 //  Created by 崔舒宁 on 2019/4/8.
 //  Copyright © 2019 崔舒宁. All rights reserved.
 //
 #include <string.h>
 #include "exampleC.h"
-/* 给出一个X>=2,判断x是否是素数*/
+
+/* 
+*@简介：给出一个X>=2,判断x是否是素数
+*@brief: given a nonnegative integer x>=2, judge x is a prime or not
+*@parameter: x, a nonnegative integer
+*@return: 1 if x is prime, 0 or not
+*/
 int IsPrime(int x)
 {
     for(int i=2;i<=x/i;i++)
